@@ -1,5 +1,7 @@
 FROM centos:7
 
+LABEL maintainer="Okassov Marat"
+
 # Download envs
 ENV SPARK=http://apache.mirrors.hoobly.com/spark/spark-2.4.6/spark-2.4.6-bin-hadoop2.7.tgz
 ENV GLUE=https://github.com/awslabs/aws-glue-libs.git
@@ -59,9 +61,9 @@ RUN yum install -y epel-release && yum clean all && \
     pip3 install boto3 botocore awscli py4j
 
 # Python3 default
-RUN rm -rf /usr/bin/python && rm -rf /usr/bin/pip \
- && ln -s /usr/bin/python3 /usr/bin/python \
- && ln -s /usr/bin/pip3 /usr/bin/pip
+RUN rm -rf /usr/bin/python && rm -rf /usr/bin/pip && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
+    ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Configure jupyter
 RUN mkdir -p /root/.local/share/jupyter/kernels/spark && \
